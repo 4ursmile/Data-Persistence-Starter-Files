@@ -6,13 +6,14 @@ using UnityEngine.UI;
 
 public class MainManager : MonoBehaviour
 {
+    
     public Brick BrickPrefab;
     public int LineCount = 6;
     public Rigidbody Ball;
 
     public Text ScoreText;
     public GameObject GameOverText;
-    
+    public GameObject inputField;
     private bool m_Started = false;
     private int m_Points;
     
@@ -71,6 +72,15 @@ public class MainManager : MonoBehaviour
     public void GameOver()
     {
         m_GameOver = true;
-        GameOverText.SetActive(true);
+        if (m_Points>MainGameManager.Instance.HighScoreCount)
+        {
+            MainGameManager.Instance.HighScoreCount = m_Points;
+            inputField.SetActive(true);
+
+        } else
+        {
+            GameOverText.SetActive(true);
+        }
+
     }
 }
